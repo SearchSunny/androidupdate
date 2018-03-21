@@ -29,9 +29,9 @@ import java.io.File;
  * 更新管理
  */
 
-public class UpdateManager {
+public class AppUpdateManager {
 
-    private static final String TAG = UpdateManager.class.getSimpleName();
+    private static final String TAG = AppUpdateManager.class.getSimpleName();
 
     private Context mContext;
     /**
@@ -44,20 +44,20 @@ public class UpdateManager {
     private boolean ready;
     private UpdateDialog updateDialog;
     FileUtil fileUtils = FileUtil.getInstance(mContext);
-    private static UpdateManager instance;
+    private static AppUpdateManager instance;
 
 
 
-    public static synchronized UpdateManager getInstance(Context context,String root_directory) {
+    public static synchronized AppUpdateManager getInstance(Context context, String root_directory) {
         if (instance == null) {
-            instance = new UpdateManager(context.getApplicationContext());
+            instance = new AppUpdateManager(context.getApplicationContext());
         }
         //初始化工具类
         SpUpdateUtil.getInstance(context).putString(SpUpdateUtil.DOWNLOAD_ROOT_DIRECTORY, root_directory);
         return instance;
     }
 
-    public UpdateManager(Context context) {
+    public AppUpdateManager(Context context) {
         this.mContext = context;
     }
     //版本检测

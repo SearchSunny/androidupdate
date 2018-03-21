@@ -30,7 +30,7 @@ public class TestUpdateManager {
         this.mContext = context;
     }
 
-    private UpdateManager updateManager = UpdateManager.getInstance(mContext, "MyClinic");
+    private AppUpdateManager updateManager = AppUpdateManager.getInstance(mContext, "MyClinic");
 
     public void setAutoUpdate(boolean autoUpdate) {
         this.autoUpdate = autoUpdate;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="update_colorPrimary">#3F51B5</color>
+    <color name="update_colorPrimaryDark">#303F9F</color>
+    <color name="update_colorAccent">#FF4081</color>
+
+    <color name="update_white">#ffffff</color>
+    <!-- 白色 -->
+    <color name="update_ivory">#fffff0</color>
+    <!-- 象牙色 -->
+    <color name="update_lightyellow">#ffffe0</color>
+    <color name="update_color_update">#00b0f0</color>
+    <color name="update_color_line1">#dddddd</color>
+    <color name="update_transparent">#00000000</color>
+    <color name="update_color_line2">#D8D8D8</color>
+    <color name="update_num_text_blue">#00b0f0</color>
+</resources>

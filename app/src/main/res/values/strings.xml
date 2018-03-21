@@ -1,0 +1,20 @@
+<resources>
+    <string name="update_app_name">android-update</string>
+
+    <!-- 版本更新 start -->
+    <string name="update_soft_update_no">已经是最新版本</string>
+    <string name="update_soft_update_title">新版本</string>
+    <string name="update_soft_update_default_content">最新版本：%1$s\n升级包大小：%2$sM\n\n更新内容：\n%3$s\n\n请尽量在Wi-Fi环境下进行更新</string>
+    <string name="update_soft_update_force_content">最新版本：%1$s\n升级包大小：%2$sM\n更新内容：%3$s</string>
+    <string name="update_soft_update_updatebtn">下载更新</string>
+    <string name="update_soft_update_later">残忍拒绝</string>
+    <string name="update_soft_update">更新</string>
+    <string name="update_soft_install_title">等待安装</string>
+    <string name="update_string_install_btn">更新升级</string>
+    <string name="update_soft_install_content">更新内容：\n%1$s\n\nWi-Fi下已自动为您下载安装包</string>
+    <string name="update_soft_no_wifi">您正在使用移动网络，下载将会耗费您的流量，请问是否继续下载？</string>
+    <string name="update_string_update_now">正在更新</string>
+    <string name="update_auto_update_download_progress">正在下载:%1$d%%</string>
+    <!-- 版本更新 end -->
+
+</resources>

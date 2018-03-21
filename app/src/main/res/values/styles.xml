@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="update_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/update_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/update_colorPrimaryDark</item>
+        <item name="colorAccent">@color/update_colorAccent</item>
+    </style>
+
+    <!-- Dialog theme. -->
+    <style name="update_MyDialogTheme" parent="android:Theme.Dialog"/>
+
+    <!-- 自定义对话框 -->
+    <style name="update_CustomDialog" parent="@style/update_MyDialogTheme">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:windowBackground">@color/update_transparent</item>
+    </style>
+
+
+    <style name="update_NumberProgressBar_Relax_Blue">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+        <item name="update_progress_max">100</item>
+        <item name="update_progress_current">0</item>
+
+        <item name="update_progress_unreached_color">@color/update_color_line2</item>
+        <item name="update_progress_reached_color">@color/update_num_text_blue</item>
+        <item name="update_progress_text_size">12sp</item>
+        <item name="update_progress_text_color">@color/update_num_text_blue</item>
+        <item name="update_progress_reached_bar_height">3dp</item>
+        <item name="update_progress_unreached_bar_height">3dp</item>
+    </style>
+
+</resources>

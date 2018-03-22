@@ -52,7 +52,7 @@ public class UpdateDialog implements View.OnClickListener {
 
     // 初始化控件
     private void initView(boolean hasCancel) {
-        dialog.setContentView(R.layout.dialog_update);
+        dialog.setContentView(R.layout.update_dialog);
         titleTxt = (TextView) dialog.findViewById(R.id.custom_dialog_title);
         content = (TextView) dialog.findViewById(R.id.custom_dialog_content);
         btn_ok = (Button) dialog.findViewById(R.id.custom_dialog_btnOk);

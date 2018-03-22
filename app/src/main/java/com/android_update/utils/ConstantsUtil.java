@@ -19,7 +19,7 @@ public class ConstantsUtil {
     public final static int MAX_PROGRESS = 100;
 
     /**
-     * 下载进度
+     * 下载进度action
      */
     public final static String ACTION_UPDATE_PROGRESS = "ACTION_UPDATE_PROGRESS";
 

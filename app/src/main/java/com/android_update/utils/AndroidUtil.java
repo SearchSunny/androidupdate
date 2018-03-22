@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.storage.StorageManager;
 import android.support.v4.content.FileProvider;
 
+import com.android_update.BuildConfig;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +39,6 @@ public class AndroidUtil {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-
         return info;
     }
     /**
@@ -109,6 +110,24 @@ public class AndroidUtil {
         return isAvailable;
     }
 
+    public static boolean isNetworkUrl(String url) {
+        if (url == null || url.length() == 0) {
+            return false;
+        }
+        return isHttpUrl(url) || isHttpsUrl(url);
+    }
+
+    public static boolean isHttpUrl(String url) {
+        return (null != url) &&
+                (url.length() > 6) &&
+                url.substring(0, 7).equalsIgnoreCase("http://");
+    }
+
+    public static boolean isHttpsUrl(String url) {
+        return (null != url) &&
+                (url.length() > 7) &&
+                url.substring(0, 8).equalsIgnoreCase("https://");
+    }
     /**
      * 判断当前网络是否为wifi
      *

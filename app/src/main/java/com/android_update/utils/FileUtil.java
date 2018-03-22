@@ -27,7 +27,6 @@ public class FileUtil {
     }
     private FileUtil(Context context) {
         ROOT_DIRECTORY = SpUpdateUtil.getInstance(context).getString(SpUpdateUtil.DOWNLOAD_ROOT_DIRECTORY,"RgdAppUpdate");
-
     }
 
     // 更新包路径

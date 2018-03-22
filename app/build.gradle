@@ -1,9 +1,11 @@
-apply plugin: 'com.android.application'
-
+if (isDebug){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
 android {
     compileSdkVersion 25
     defaultConfig {
-        applicationId "com.android_update"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
@@ -12,8 +14,21 @@ android {
     }
     buildTypes {
         release {
+            isDebug = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            isDebug = true
+        }
+    }
+    sourceSets {
+        main {
+            if(isDebug.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/release/AndroidManifest.xml'
+            }
         }
     }
     //通过实现约定资源前缀名(resourcePrefix)来避免在合并多个组件到主工程中时,可能会出现资源引用冲突
@@ -22,10 +37,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:25.4.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    if (isDebug){
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'com.android.support:appcompat-v7:25.4.0'
+        implementation 'com.android.support:support-v4:25.4.0'
+        implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'com.android.support.test:runner:1.0.1'
+        androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    }
 }

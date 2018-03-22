@@ -29,7 +29,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <com.rograndec.myclinic.update.widget.NumberProgressBar
+        <com.android_update.widget.NumberProgressBar
             android:id="@+id/custom_dialog_bar"
             style="@style/update_NumberProgressBar_Relax_Blue"
             android:layout_height="80dp"

@@ -68,7 +68,7 @@ public class UpdateProgressDialog implements View.OnClickListener {
 
     // 初始化控件
     private void initView() {
-        dialog.setContentView(R.layout.dialogprogress_layout);
+        dialog.setContentView(R.layout.update_dialogprogress_layout);
         custom_dialog_title = (TextView) dialog.findViewById(R.id.custom_dialog_title);
 
         linear_dialog_bar = (LinearLayout) dialog.findViewById(R.id.linear_dialog_bar);

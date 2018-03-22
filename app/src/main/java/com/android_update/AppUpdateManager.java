@@ -12,11 +12,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android_update.entity.CheckNewUpdate;
-import com.android_update.entity.CheckNewUpdateInfo;
 import com.android_update.service.DownLoadService;
 import com.android_update.utils.AndroidUtil;
-import com.android_update.utils.CheckType;
+import com.android_update.utils.CheckFlag;
 import com.android_update.utils.ConstantsUtil;
 import com.android_update.utils.FileUtil;
 import com.android_update.utils.SpUpdateUtil;
@@ -43,36 +41,31 @@ public class AppUpdateManager {
      */
     private boolean ready;
     private UpdateDialog updateDialog;
-    FileUtil fileUtils = FileUtil.getInstance(mContext);
-    private static AppUpdateManager instance;
-
-
-
-    public static synchronized AppUpdateManager getInstance(Context context, String root_directory) {
-        if (instance == null) {
-            instance = new AppUpdateManager(context.getApplicationContext());
-        }
-        //初始化工具类
-        SpUpdateUtil.getInstance(context).putString(SpUpdateUtil.DOWNLOAD_ROOT_DIRECTORY, root_directory);
-        return instance;
-    }
-
-    public AppUpdateManager(Context context) {
+    private static FileUtil fileUtils;
+    /**
+     *
+     * @param context
+     * @param root_directory 更新文件根目录名称
+     * @return
+     */
+    public AppUpdateManager(Context context,String root_directory) {
         this.mContext = context;
+        //初始化工具类(需先初始化SpUpdateUtil)
+        SpUpdateUtil.getInstance(context).putString(SpUpdateUtil.DOWNLOAD_ROOT_DIRECTORY, root_directory);
+        fileUtils = FileUtil.getInstance(context);
     }
-    //版本检测
 
     /**
      * 检查版本更新
      */
-    public CheckType checkVersionUpdate(boolean autoDetection) {
+    public CheckFlag checkVersionUpdate(boolean autoDetection) {
         autoUpdate = autoDetection;
         if (!AndroidUtil.isNetworkAvailable(mContext)) {
-            return CheckType.CHECK_NO_NETWORK;
+            return CheckFlag.CHECK_NO_NETWORK;
         }
         if (!AndroidUtil.isSDCardEnable(mContext)) {
             Log.d(TAG, "无SDCard！");
-            return CheckType.CHECK_SDCARD;
+            return CheckFlag.CHECK_SDCARD;
         }
         if (updateDialog == null) {
             updateDialog = new UpdateDialog(mContext, true);
@@ -97,47 +90,13 @@ public class AppUpdateManager {
                 } else {
                     Log.d(TAG, "更新功能--文件版本号不相等");
                     showUpdateDialog();
-                    return CheckType.DIALOG;
+                    return CheckFlag.DIALOG;
                 }
             }
         }
         SpUpdateUtil.getInstance(mContext).clearUpdateInfo();
-        return CheckType.NORMAL;
+        return CheckFlag.NORMAL;
     }
-
-    /**
-     * @param result 服务端返回参数
-     * @return 返回是否是最新版本, true表示是最新版本，否则为false
-     */
-    public void doHandleCheckNewVersionResponse(CheckNewUpdateInfo result) {
-        Log.d("test1", "版本更新：" + result);
-        try {
-            CheckNewUpdate bean = result.getResult();
-            String hasNew = bean.isHasNew();
-            // 有更新
-            String size = bean.getVersionSize();
-            String apkURL = bean.getDownloadUrl();
-            String mustUpdate = bean.isMustUpdate();
-            String version = bean.getVersion();
-            String content = bean.getContent();
-            // 保存版本更新信息
-            SpUpdateUtil.getInstance(mContext).saveUpdateInfo(hasNew, size, apkURL, mustUpdate, version, content);
-            if (autoUpdate) {// 自动检查更新
-                if (AndroidUtil.isWifi(mContext) && mustUpdate.equals("NO")) {// 当前为wifi且非强制更新开始静默下载
-                    startUpdate(apkURL, true, version);
-                } else {
-                    //非WIFI情况下或强制更新情况
-                    showUpdateDialog();
-                }
-            } else {// 手动检查更新
-                showUpdateDialog();
-            }
-        } catch (Exception e) {
-            Log.e("BaseActivity", "JSON数据解析异常");
-        }
-    }
-
-
     /**
      * 显示升级对话框
      */
@@ -281,11 +240,16 @@ public class AppUpdateManager {
      * @param silent 是否静默下载(用于判断下载中的广播接收)
      */
     public void startUpdate(String url, boolean silent, String version) {
-        SpUpdateUtil.getInstance(mContext).putBoolean(SpUpdateUtil.DOWNLOAD_SILENCE, silent);
-        Intent intent = new Intent(mContext, DownLoadService.class);
-        intent.putExtra(ConstantsUtil.APK_DOWNLOAD_URL, url);
-        intent.putExtra(ConstantsUtil.APK_DOWNLOAD_VERSION, version);
-        mContext.startService(intent);
+        if (AndroidUtil.isNetworkUrl(url)){
+            SpUpdateUtil.getInstance(mContext).putBoolean(SpUpdateUtil.DOWNLOAD_SILENCE, silent);
+            Intent intent = new Intent(mContext, DownLoadService.class);
+            intent.putExtra(ConstantsUtil.APK_DOWNLOAD_URL, url);
+            intent.putExtra(ConstantsUtil.APK_DOWNLOAD_VERSION, version);
+            mContext.startService(intent);
+        }else{
+            Log.d(TAG, "更新功能--下载url错误=="+url );
+        }
+
     }
     /**
      * 初始化版本更新广播

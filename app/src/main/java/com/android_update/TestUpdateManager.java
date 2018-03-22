@@ -15,9 +15,9 @@ import com.android_update.utils.SpUpdateUtil;
  *
  */
 
-public class ClinicUpdateManager {
+public class TestUpdateManager {
 
-    private static final String TAG = ClinicUpdateManager.class.getSimpleName();
+    private static final String TAG = TestUpdateManager.class.getSimpleName();
     private Context mContext;
 
     private boolean autoUpdate;//是否自动检测更新,true自动检测更新,false手动检测更新
@@ -28,7 +28,7 @@ public class ClinicUpdateManager {
     public void setOnUpdateListener(OnUpdateListener onUpdateListener) {
         this.mOnUpdateListener = onUpdateListener;
     }
-    public ClinicUpdateManager(Context context) {
+    public TestUpdateManager(Context context) {
         this.mContext = context;
         updateManager = new AppUpdateManager(mContext, "MyClinic");
     };

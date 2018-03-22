@@ -9,12 +9,12 @@ import com.android_update.error.UpdateError;
 
 public class MainActivity extends Activity {
 
-    private ClinicUpdateManager mClinicUpdateManager;
+    private TestUpdateManager mClinicUpdateManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_activity_main);
-        mClinicUpdateManager = new ClinicUpdateManager(this);
+        mClinicUpdateManager = new TestUpdateManager(this);
         mClinicUpdateManager.setOnUpdateListener(new OnUpdateListener() {
             @Override
             public void onStart() {

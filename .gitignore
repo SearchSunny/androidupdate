@@ -247,4 +247,6 @@ fabric.properties
 # Freeline
 /gradle.properties
 /.idea/
+/app/src/main/AndroidManifest.xml
+
 
